@@ -1,0 +1,69 @@
+## Requisitos del sistema para instalación
+ - Windows 11
+ - Ram 12 GB minimo
+ - Procesador Intel Core (Preferiblemente)
+ - Base de datos Mysql
+ - SpringBoot 2.7.3
+ - Java 8
+ - Postman (Opcional para probar los servicios)
+ 
+  ## Instalación Java
+  - Iniciar servicio base de datos mysql
+  - Crear 2 esquemas, esquema llamado "catalogo" y esquema llamado "categoria"
+ 
+ 
+ ## Instalación Java
+ 
+ - Descomprimir zip
+ - Importar proyecto spring-boot-catalog en IDE de su preferencia
+ - En archivo src/main/resources/application.properties setear correctamente la
+   información de user y password de la base de datos mysql en las variables 
+   username y password
+ - En archivo pom.xml click derecho -> Run As -> Maven Install
+ - Menu -> Project -> Clean
+ - Menu -> Project -> Build Project
+ - En el dashboard de springboot, buscar servidor spring-boot-catalog click derecho -> (Re)start
+ - Nota: Puede que la tabla catalogo.producto no la pueda crear automáticamente hibernate en el primer start del 
+   proyecto, en ese caso por favor detener (stop) el servidor y volverlo a (Re)start
+ 
+ ## Consumo de servicios
+ 
+  - Todos los servicios para su consumo requieren de un token, 
+    en el header deben enviar  token = "5eb40c90f1cd0cbeb4b03811"
+  - En el zip se adjunta archivo Catalog_collection para importar en postman con los 3 consumos
+ 
+  ## Consumo consulta productos
+   - Method: GET
+   - Endpoint: http://localhost:8090/api/productos?sku=D12345&paginas=1&CantidadRegistrosxPagina=10
+   - Endpoint2: http://localhost:8090/api/productos
+   - header: token = "5eb40c90f1cd0cbeb4b03811"
+   
+  ## Consumo Insertar producto
+   - Method: POST
+   - Endpoint: http://localhost:8090/api/crearproducto
+   - header: token = "5eb40c90f1cd0cbeb4b03811"
+   - request Body:  
+{
+    "nombre": "nevera",
+    "categoria": {
+        "nombre": "Televisores",
+        "codigounico": "DER2222"
+    },
+    "precio": 1000.24,
+    "url": "http://imagenlavadora.com",
+    "sku": "D12345"
+}
+  ## Consumo consulta categorias
+  
+   - Method: GET
+   - Endpoint: http://localhost:8090/api/categorias
+   - header: token = "5eb40c90f1cd0cbeb4b03811" 
+   
+  ## Diseño
+  
+   - Clean Architecture
+   - Principios Solid
+   - Patrones de diseño de comportamiento: Template method, command 
+   - Patron de diseño estructural: facade
+   - patron de diseño creacional: Builder
+      
